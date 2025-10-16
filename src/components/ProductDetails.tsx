@@ -109,7 +109,7 @@ export default function ProductDetails({ product }: { product: ProductWithAttrib
                 onClick={handleAddToCart}
                 className="w-full h-[52px] flex items-center justify-center bg-[#5ECE7B] text-white font-raleway uppercase cursor-pointer
                 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                disabled={!in_stock}
+                disabled={!in_stock || Object.keys(selectedAttrs).length !== attributes.length}
                 data-testid='add-to-cart'
             >
                 ADD TO CART
