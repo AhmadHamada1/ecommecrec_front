@@ -76,16 +76,14 @@ export const CartCtxProvider = ({ children }: { children: ReactNode }) => {
         );
     };
 
-
     const decreaseQuantity = (id: string, attributes: Record<string, string>) => {
-        setItems((prev) =>
-            prev
+        setItems((prev) => {
+            const updatedItems = prev
                 .map((item) => {
                     if (
                         item.id === id &&
                         JSON.stringify(item.attributes) === JSON.stringify(attributes)
                     ) {
-                        // if quantity is 1 → remove
                         if (item.quantity <= 1) {
                             return null;
                         }
@@ -93,9 +91,14 @@ export const CartCtxProvider = ({ children }: { children: ReactNode }) => {
                     }
                     return item;
                 })
-                .filter(Boolean) as ICartItem[]
-        );
+                .filter(Boolean) as ICartItem[];
+
+            localStorage.setItem("cart-items", JSON.stringify(updatedItems));
+
+            return updatedItems;
+        });
     };
+
 
     const clearCart = () => {
         setItems([]);
