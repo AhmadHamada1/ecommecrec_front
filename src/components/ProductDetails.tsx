@@ -6,7 +6,7 @@ import { useCartContext } from "../contexts/CartContext";
 import { toast } from "sonner";
 
 export default function ProductDetails({ product }: { product: ProductWithAttributes }) {
-    const { addItem } = useCartContext();
+    const { addItem, setOpen } = useCartContext();
     const [selectedAttrs, setSelectedAttrs] = useState<Record<string, string>>({});
 
     if (!product) return null;
@@ -33,6 +33,7 @@ export default function ProductDetails({ product }: { product: ProductWithAttrib
             quantity: 1,
         };
         addItem(item);
+        setOpen(true);
     };
 
     return (
@@ -111,12 +112,12 @@ export default function ProductDetails({ product }: { product: ProductWithAttrib
                 disabled={!in_stock}
                 data-testid='add-to-cart'
             >
-                Add to Cart
+                ADD TO CART
             </button>
 
             {description && (
-                <div className="max-w-none font-roboto text-main">
-                    <ReactQuill value={description} readOnly={true} theme="bubble" data-testid='product-description' />
+                <div className="max-w-none font-roboto text-main" data-testid='product-description'>
+                    <ReactQuill value={description} readOnly={true} theme="bubble" />
                 </div>
             )}
         </div>
