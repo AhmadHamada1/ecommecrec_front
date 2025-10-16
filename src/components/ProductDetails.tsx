@@ -49,7 +49,7 @@ export default function ProductDetails({ product }: { product: ProductWithAttrib
                         {attr.type === "text" && (
                             <div
                                 className="flex items-center gap-4"
-                                data-testid={`product-attribute-${attr.name}`}
+                                data-testid={`product-attribute-${attr.name.toLowerCase()}`}
                             >
                                 {attr.items.map((item) => {
                                     const isSelected = selectedAttrs[attr.name] === item.value;
@@ -63,7 +63,7 @@ export default function ProductDetails({ product }: { product: ProductWithAttrib
                                                     ? "bg-black text-white border-black"
                                                     : "border-gray-400 text-gray-800"
                                                 }`}
-                                            data-testid={`product-attribute-${attr.name}-${item.value}`}
+                                            data-testid={`product-attribute-${attr.name.toLowerCase()}-${item.value}`}
                                         >
                                             {item.displayValue}
                                         </button>
@@ -73,7 +73,7 @@ export default function ProductDetails({ product }: { product: ProductWithAttrib
                         )}
 
                         {attr.type === "swatch" && (
-                            <div className="flex items-center gap-4 order-2" data-testid={`product-attribute-${attr.name}`}>
+                            <div className="flex items-center gap-4 order-2" data-testid={`product-attribute-${attr.name.toLowerCase()}`}>
                                 {attr.items.map((item) => {
                                     const isSelected = selectedAttrs[attr.name] === item.value;
                                     return (
@@ -83,7 +83,7 @@ export default function ProductDetails({ product }: { product: ProductWithAttrib
                                             onClick={() => handleSelect(attr.name, item.value)}
                                             className={`cursor-pointer h-8 w-8 border flex items-center justify-center ${isSelected ? "border-gray-300 ring-1 ring-offset-1 ring-[#5ece7b]" : "border-gray-300"}`}
                                             style={{ backgroundColor: item.displayValue }}
-                                            data-testid={`product-attribute-${attr.name}-${item.value}`}
+                                            data-testid={`product-attribute-${attr.name.toLowerCase()}-${item.value}`}
                                         />
                                     );
                                 })}
